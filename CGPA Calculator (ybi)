@@ -1,0 +1,36 @@
+class Subject:
+    def __init__(self, name, credit, grade_point):
+        self.name = name
+        self.credit = credit
+        self.grade_point = grade_point
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.subjects = []
+
+    def add_subject(self, subject):
+        self.subjects.append(subject)
+
+    def calculate_cgpa(self):
+        total_credits = 0
+        total_weighted_points = 0
+
+        for subject in self.subjects:
+            total_credits += subject.credit
+            total_weighted_points += subject.credit * subject.grade_point
+
+        if total_credits == 0:
+            return 0.0
+        return round(total_weighted_points / total_credits, 2)
+
+# Example usage
+student = Student("John Doe")
+
+# Add subjects: name, credit, grade_point
+student.add_subject(Subject("Math", 4, 9.0))
+student.add_subject(Subject("Physics", 3, 8.5))
+student.add_subject(Subject("Chemistry", 3, 7.0))
+
+cgpa = student.calculate_cgpa()
+print(f"CGPA of {student.name}: {cgpa}")
